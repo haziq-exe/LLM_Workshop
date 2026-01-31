@@ -6,12 +6,17 @@ from mpl_toolkits.mplot3d import Axes3D
 class GradientDescentDemo:
     def __init__(self, START_X, START_Y, LEARNING_RATE, NUM_STEPS):
 
+        self.START_X = START_X
+        self.START_Y = START_Y
+        self.LEARNING_RATE = LEARNING_RATE
+        self.NUM_STEPS = NUM_STEPS
+
         x_range = np.linspace(-4, 4, 100)
         y_range = np.linspace(-4, 4, 100)
         X, Y = np.meshgrid(x_range, y_range)
         Z = self.complex_landscape(X, Y)
 
-        path_x, path_y, path_z = self.gradient_descent_path(START_X, START_Y, LEARNING_RATE, NUM_STEPS)
+        path_x, path_y, path_z = self.gradient_descent_path()
 
         fig = plt.figure(figsize=(14, 5))
 
@@ -56,15 +61,15 @@ class GradientDescentDemo:
         dy = (self.complex_landscape(x, y + epsilon) - self.complex_landscape(x, y - epsilon)) / (2 * epsilon)
         return dx, dy
 
-    def gradient_descent_path(self, start_x, start_y, learning_rate=0.1, num_steps=100):
+    def gradient_descent_path(self):
         """Perform gradient descent and return the path"""
-        x, y = start_x, start_y
+        x, y = self.START_X, self.START_Y
         path_x, path_y, path_z = [x], [y], [self.complex_landscape(x, y)]
         
-        for _ in range(num_steps):
+        for _ in range(self.NUM_STEPS):
             dx, dy = self.gradient(x, y)
-            x = x - learning_rate * dx
-            y = y - learning_rate * dy
+            x = x - self.LEARNING_RATE * dx
+            y = y - self.LEARNING_RATE * dy
             path_x.append(x)
             path_y.append(y)
             path_z.append(self.complex_landscape(x, y))
