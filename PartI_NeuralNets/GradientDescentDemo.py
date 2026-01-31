@@ -11,7 +11,7 @@ class GradientDescentDemo:
         X, Y = np.meshgrid(x_range, y_range)
         Z = self.complex_landscape(X, Y)
 
-        path_x, path_y, path_z = self.gradient_descent_path(self.START_X, self.START_Y, self.LEARNING_RATE, self.NUM_STEPS)
+        path_x, path_y, path_z = self.gradient_descent_path(START_X, START_Y, LEARNING_RATE, NUM_STEPS)
 
         fig = plt.figure(figsize=(14, 5))
 
