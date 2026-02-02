@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 class TokenizationDemo:
-    def __init__(self, tokenizer_name="gpt2"):
+    def __init__(self, tokenizer_name="bert-base-uncased"):
         """
         Initialize tokenizer once so the notebook stays clean.
         """
@@ -25,7 +25,6 @@ class TokenizationDemo:
         token_ids = self.tokenizer.convert_tokens_to_ids(tokens)
 
         self.display_summary(text, tokens, token_ids)
-        self.visualize_tokens(tokens)
 
     def display_summary(self, text, tokens, token_ids):
         """
