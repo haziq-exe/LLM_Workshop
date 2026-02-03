@@ -80,7 +80,7 @@ class SuperWeightDemo:
                 print(f"Layer {layer_idx}: Restored super weights and pruned {pruned} random weights")
 
 
-    def prune_random_except_super(model, super_coords, fraction=0.01, seed=42):
+    def prune_random_except_super(self, fraction=0.01, seed=42):
         """
         Prune a small fraction of weights randomly, but leave super weights intact.
         
@@ -93,10 +93,10 @@ class SuperWeightDemo:
         torch.manual_seed(seed)
         
         # Convert super_coords to a set for fast lookup
-        super_set = set(super_coords)
+        super_set = set(self.super_coords)
         
         with torch.no_grad():
-            for layer_idx, layer in enumerate(model.model.layers):
+            for layer_idx, layer in enumerate(self.model.model.layers):
                 W = layer.mlp.down_proj.weight
                 n_rows, n_cols = W.shape
                 total_weights = n_rows * n_cols
