@@ -93,7 +93,7 @@ class SuperWeightDemo:
         torch.manual_seed(seed)
         
         # Convert super_coords to a set for fast lookup
-        super_set = set(self.super_coords)
+        super_set = set(self.coords)
         
         with torch.no_grad():
             for layer_idx, layer in enumerate(self.model.model.layers):
