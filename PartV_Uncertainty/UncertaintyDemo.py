@@ -14,7 +14,7 @@ class TokenUncertaintyVisualizer:
         self.logits = None  # [num_generated_tokens, vocab_size]
 
     def token_entropy(self, logits):
-      probs = torch.softmax(logits, dim=-1)
+      probs = torch.softmax(self.logits, dim=-1)
       entropy = -torch.sum(probs * torch.log(probs + 1e-12))
       return entropy
 
@@ -52,7 +52,7 @@ class TokenUncertaintyVisualizer:
         tokens = self.tokenizer.convert_ids_to_tokens(gen_token_ids.tolist())
         
         for idx, tok in enumerate(tokens):
-            entropy = self.token_entropy(logits[idx]) if idx < len(logits) else 0.0
+            entropy = self.token_entropy(self.logits[idx]) if idx < len(self.logits) else 0.0
             print(f"{idx:2d} : {repr(tok)} : entropy = {entropy}")
 
     def plot_token_distribution_at_position(self, token_index, top_k=100):
